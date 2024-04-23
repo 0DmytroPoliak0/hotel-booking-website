@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluto Hotels Ltd - Reports</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+
+</head>
+<body class="bg-gray-100">
+
+<header class="bg-white shadow-md flex items-center justify-between px-4 py-2">
+    <img src="logo.png" class="menu-icon">
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Map</a></li>
+                <a href="Main.html">Link to Main Page</a>
+            </ul>
+        </nav>
+    </div>
+    <h1 class="text-lg font-bold">Reports</h1>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Sign Up
+    </button>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        Log In
+    </button>
+</header>
+
+<div class="container mx-auto mt-8">
+    <div class="tabs flex justify-between mb-8">
+        <!-- Tab Buttons -->
+        <button class="tablink" onclick="openReport('topCustomers')">Top Customers</button>
+    </div>
+
+    <div id="topCustomers" class="tabcontent hidden">
+        <h2>Top Customers Report</h2>
+        <div id="topCustomersData">Loading...</div>
+        <button onclick="saveReport()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Save as PDF</button>
+
+    </div>
+</div>
+
+<footer class="bg-gray-800 text-white text-center py-4 mt-8">
+    <p>Copyright &copy; 2022 Pluto Hotels Ltd</p>
+    <p>Some hotels require you to cancel more than 24 hours before check-in. Details on site.</p>
+    <p>© 2024 Pluto Hotels Ltd.com is an Expedia Group company. All rights reserved.</p>
+    <a href="mailto: contact@plutohotels.com">contact@plutohotels.com</a>
+</footer>
+
+<script>
+
+    console.log(jsPDF); // This should output the jsPDF function or object if it's correctly loaded
+
+    function openReport(reportName) {
+        // Show the report content for "Top Customers"
+        document.getElementById(reportName).style.display = 'block';
+        if (reportName === 'topCustomers') {
+            fetchTopCustomers();
+        }
+    }
+
+    function fetchTopCustomers() {
+        fetch('http://localhost:8000/topCustomers')
+            .then(response => response.text())
+            .then(data => displayTopCustomers(data))
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('topCustomersData').innerText = 'Failed to load data.';
+            });
+    }
+
+    function displayTopCustomers(data) {
+        const container = document.getElementById('topCustomersData');
+        container.innerHTML = ''; // Clear previous content
+
+        const ul = document.createElement('ul');
+        data.trim().split('\n').forEach(line => {
+            let [userID, name, email, bookingCount] = line.split(',');
+            const li = document.createElement('li');
+            li.textContent = `Name: ${name}, Email: ${email}, Bookings: ${bookingCount}`;
+            ul.appendChild(li);
+        });
+        container.appendChild(ul);
+    }
+
+    function saveReport() {
+    console.log(jsPDF); // Check if jsPDF is loaded right before using it
+    const doc = new jsPDF();
+    doc.text(20, 20, 'Top Customers Report');
+
+    // Basic example text. Replace this with your actual data iteration logic.
+    doc.text(20, 30, 'This is a test to ensure jsPDF is working.');
+
+    // Save the PDF
+    doc.save('Report.pdf');
+}
+
+window.addEventListener('load', function() {
+    console.log(jsPDF); // Now check if jsPDF is loaded
+    // The rest of your JavaScript code
+});
+
+    // Initial tab open
+    openReport('topCustomers');
+</script>
+</body>
+</html>

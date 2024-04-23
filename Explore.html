@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+    <style>
+        @media only screen and (min-width: 1024px) {
+        }
+        .menu-icon {
+            width: 220px;
+            height: 40px;
+            cursor: pointer;
+            float: left;
+            align-items: left;
+            padding-top: 3px;
+            padding-left: 0px;
+        }
+        header {
+            height: 14em;
+            background-color: #000000;
+            color: #fff;
+            text-align: center;
+            padding-left: 8em;
+            padding-top: 1em;
+        }
+        h1 {
+            font-size: 60px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin-bottom: 0px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 22px;
+            padding-top: 0px;
+            text-align: left;
+        }
+        h3 {
+            color: #009688;
+            margin-top: 0px;
+        }
+        h4 {
+            color: #666;
+            padding: 0px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .navbar{
+            height: 12%;
+            display: flex;
+            align-items: center;
+            margin-left: 40px;
+            margin-right: 40px;
+            text-decoration: none;
+            list-style-type: none;
+        }
+        nav {
+            flex: 1;
+            text-align: right;
+            padding-right: 30px;
+            text-decoration: none;
+            list-style-type: none;
+        }
+        nav ul li{
+            list-style: none;
+            display: inline-block;
+            margin-left: 60px;
+            text-decoration: none;
+            list-style-type: none;
+        }
+        nav ul li a{
+            text-decoration: none;
+            color:#ffffff;
+            font-size: 22px;
+            list-style-type: none;
+        }
+        button{
+            width: 180px;
+            color: rgb(0, 0, 0);
+            font-size: 20px;
+            padding: 14px 0;
+            background: white;
+            border: 0;
+            border-radius: 20px;
+            outline: none;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+                background-color: #00796b;
+            }
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #f2f2f2;
+                }
+                .container {
+                    max-width: 100%;
+                    margin: 20px auto;
+                    padding: 20px;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                }
+                .hotel {
+                    border-bottom: 1px solid #ccc;
+                    padding: 10px 0;
+                    display: flex;
+                    align-items: center;
+                }
+                .hotel:last-child {
+                    border-bottom: none;
+                }
+                .hotel img {
+                    width: 25em;
+                    height: 15em;
+                    border-radius: 8px;
+                    margin-right: 20px;
+                }
+                .hotel-info {
+                    flex: 6;
+                }
+                .hotel-name {
+                    font-weight: bold;
+                    font-size: 18px;
+                    margin: 5px 0;
+                }
+                .hotel-location {
+                    color: #666;
+                    padding: 2px;
+                }
+                .hotel-price {
+                    font-weight: bold;
+                    color: #009688;
+                    font-size: 20px;
+                }
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                }
+                li {
+                    margin-bottom: 8px;
+                    list-style: none;
+                }
+                li:before {
+                    content: "•";
+                    margin-right: 5px;
+                    color: #009688;
+                }
+                .booking-button {
+                    background-color: #000000;
+                    color: #fff;
+                    border: none;
+                    font-size: 16px;
+                    padding: 8px 16px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    width: 180px;
+                    transition: background-color 0.3s;
+                }
+                .booking-button:hover {
+                    background-color: #00796b;
+                }
+    </style>
+</head>
+<body>
+<header>
+    <a href="Main.html"><img src="logo.png" class="menu-icon"></a>
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Contact Us</a></li>
+                <li> <a href="Account.html">Account</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <h1 align="left">Book your next Destination</h1>
+    <button type="button" onclick="location.href='https:'">Sign Up</button>
+    <button type="button" onclick="location.href='https:'">Log In</button>
+</header>
+<div class="container">
+    <div class="hotel">
+        <img src="Hotel Images/Explore1.jpg" alt="Hotel 1">
+        <div class="hotel-info">
+            <div class="hotel-name">Surby Shell Hotels</div>
+            <div class="hotel-location">9876-32 West Georgia St, Vancouver</div>
+            <div class="hotel-price">$360 per night</div>
+            <ul>
+                <li>Free Wi-Fi</li>
+                <li>Fully equipped kitchen</li>
+                <li>Smart TV with streaming services</li>
+                <li>Complimentary coffee and tea</li>
+                <li>Cozy reading nook</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore2.jpg" alt="Hotel 2">
+        <div class="hotel-info">
+            <div class="hotel-name">Armani Bur Hotels</div>
+            <div class="hotel-location">5622-17 Whistler Ave, Calgary</div>
+            <div class="hotel-price">$470 per night</div>
+            <ul>
+                <li>Ocean view balcony</li>
+                <li>BBQ grill</li>
+                <li>Beach towels and umbrellas</li>
+                <li>Outdoor shower</li>
+                <li>Bicycles for exploring the coast</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore3.jpg" alt="Hotel 3">
+        <div class="hotel-info">
+            <div class="hotel-name">Pastal Coast Hotels</div>
+            <div class="hotel-location">4733-27 Arbin St, Toronto</div>
+            <div class="hotel-price">$830 per night</div>
+            <ul>
+                <li>Private hot tub</li>
+                <li>Fireplace with firewood provided</li>
+                <li>Hiking trail access</li>
+                <li>Outdoor dining area with mountain views</li>
+                <li>Board games and puzzles for family fun</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore4.jpg" alt="Hotel 3">
+        <div class="hotel-info">
+            <div class="hotel-name">Richy's Crew Hotels</div>
+            <div class="hotel-location">4733-27 Gray St, Maldives</div>
+            <div class="hotel-price">$899 per night</div>
+            <ul>
+                <li>Central location near attractions</li>
+                <li>Complimentary parking space</li>
+                <li>Access to building amenities (gym, pool)</li>
+                <li>Public transit nearby</li>
+                <li>Local restaurant and activity recommendations</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore5.jpg" alt="Hotel 3">
+        <div class="hotel-info">
+            <div class="hotel-name">Lasha Lehmer Hotels</div>
+            <div class="hotel-location">4733-27 Whalley St, Vancouver</div>
+            <div class="hotel-price">$730 per night</div>
+            <ul>
+                <li>Wood-burning stove</li>
+                <li>Hammock on the porch</li>
+                <li>Fishing gear for nearby streams</li>
+                <li>Wildlife spotting guidebook</li>
+                <li>Star-gazing telescope</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore6.jpg" alt="Hotel 1">
+        <div class="hotel-info">
+            <div class="hotel-name">Surby Shell Hotels</div>
+            <div class="hotel-location">9876-32 West Georgia St, Vancouver</div>
+            <div class="hotel-price">$360 per night</div>
+            <ul>
+                <li>Free Wi-Fi</li>
+                <li>Fully equipped kitchen</li>
+                <li>Smart TV with streaming services</li>
+                <li>Complimentary coffee and tea</li>
+                <li>Cozy reading nook</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore1.jpg" alt="Hotel 2">
+        <div class="hotel-info">
+            <div class="hotel-name">Armani Bur Hotels</div>
+            <div class="hotel-location">5622-17 Whistler Ave, Calgary</div>
+            <div class="hotel-price">$470 per night</div>
+            <ul>
+                <li>Ocean view balcony</li>
+                <li>BBQ grill</li>
+                <li>Beach towels and umbrellas</li>
+                <li>Outdoor shower</li>
+                <li>Bicycles for exploring the coast</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore3.jpg" alt="Hotel 3">
+        <div class="hotel-info">
+            <div class="hotel-name">Pastal Coast Hotels</div>
+            <div class="hotel-location">4733-27 Arbin St, Toronto</div>
+            <div class="hotel-price">$830 per night</div>
+            <ul>
+                <li>Private hot tub</li>
+                <li>Fireplace with firewood provided</li>
+                <li>Hiking trail access</li>
+                <li>Outdoor dining area with mountain views</li>
+                <li>Board games and puzzles for family fun</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore4.jpg" alt="Hotel 3">
+        <div class="hotel-info">
+            <div class="hotel-name">Richy's Crew Hotels</div>
+            <div class="hotel-location">4733-27 Gray St, Maldives</div>
+            <div class="hotel-price">$899 per night</div>
+            <ul>
+                <li>Central location near attractions</li>
+                <li>Complimentary parking space</li>
+                <li>Access to building amenities (gym, pool)</li>
+                <li>Public transit nearby</li>
+                <li>Local restaurant and activity recommendations</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+    <div class="hotel">
+        <img src="Hotel Images/Explore5.jpg" alt="Hotel 3">
+        <div class="hotel-info">
+            <div class="hotel-name">Lasha Lehmer Hotels</div>
+            <div class="hotel-location">4733-27 Whalley St, Vancouver</div>
+            <div class="hotel-price">$730 per night</div>
+            <ul>
+                <li>Wood-burning stove</li>
+                <li>Hammock on the porch</li>
+                <li>Fishing gear for nearby streams</li>
+                <li>Wildlife spotting guidebook</li>
+                <li>Star-gazing telescope</li>
+            </ul>
+        </div>
+        <a href="Booking1.html"><button class="booking-button">Book Now</button></a>
+    </div>
+</div>
+</body>
+</html>
+

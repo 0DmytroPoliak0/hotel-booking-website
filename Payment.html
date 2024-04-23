@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Details</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        color: white;
+        background-color: #f0f0f0;
+        background-image: url("Background.jpg");
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background: #474545c6;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        padding: 0px;
+        font-size: 30px;
+        font-family: Arial, Helvetica, serif;
+        font-weight: 4em;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+    }
+
+    input[type="text"], input[type="number"], select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ffffff;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        background-color: #2f5985;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #37608d;
+    }
+
+    .confirmation {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 9999; /* Ensure it appears above other elements */
+    }
+
+    .confirmation img {
+        width: 300px;
+        height: auto;
+        display: block;
+        margin: 0 auto 10px;
+    }
+
+    .confirmation p {
+        text-align: center;
+        font-weight: bold;
+        color: #008000; /* Green color for confirmation message */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Payment Details</h2>
+  <form id="paymentForm" action="Main.html" method="post">
+    <label for="cardType">Payment Method:</label>
+    <select id="cardType" name="cardType">
+      <option value="credit">Credit Card</option>
+      <option value="debit">Debit Card</option>
+    </select>
+
+    <label for="cardHolder">Cardholder's Name:</label>
+    <input type="text" id="cardHolder" name="cardHolder" required>
+
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" id="cardNumber" name="cardNumber" required>
+
+    <label for="expiryDate">Expiry Date:</label>
+    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YYYY" required>
+
+    <label for="cvv">CVV:</label>
+    <input type="number" id="cvv" name="cvv" required>
+
+    <input type="submit" value="Pay Now">
+  </form>
+</div>
+
+<!-- Confirmation message -->
+<div id="confirmation" class="confirmation">
+  <img src="checkmark.jpg" alt="checkmark">
+  <p>Confirmed!</p>
+</div>
+
+<script>
+  document.getElementById("paymentForm").addEventListener("submit", function(event) {
+      // Prevent default form submission
+      event.preventDefault();
+
+      // Display confirmation message
+      var confirmation = document.getElementById("confirmation");
+      confirmation.style.display = "block";
+
+      // Hide confirmation message after 5 seconds
+      setTimeout(function() {
+          confirmation.style.display = "none";
+
+          // Redirect to home screen after confirmation
+          window.location.href = "Main.html";
+      }, 3000);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-image: url("Background.jpg");
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #474545c6;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            padding: 0px;
+            font-size: 30px;
+            font-family: Arial, Helvetica, serif;
+            text-align: center;
+            font-weight: 4em;
+
+        }
+
+        .form-group {
+            margin-bottom: 1px;
+            padding: 5px;
+            width: 95%;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 15px;
+            width: 100%;
+        }
+
+        input[type="text"], input[type="email"],
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #f7f7f7;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2f5985;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #37608d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Book your Destination...</h2>
+    <form id="bookingForm" action="#" method="post">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="checkin">Check-in Date</label>
+            <input type="date" id="checkin" name="checkin" required>
+        </div>
+        <div class="form-group">
+            <label for="checkout">Check-out Date</label>
+            <input type="date" id="checkout" name="checkout" required>
+        </div>
+        <div class="form-group">
+            <label for="room-type">Room Type</label>
+            <select id="room-type" name="room-type">
+                <option value="single">Single</option>
+                <option value="double">Double</option>
+                <option value="suite">Suite</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="comments">Additional Comments</label>
+            <textarea id="comments" name="comments" rows="4"></textarea>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<script>
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting in the traditional way
+
+        // Correctly constructing URLSearchParams with form data
+        const formData = new URLSearchParams({
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            checkin: document.getElementById('checkin').value,
+            checkout: document.getElementById('checkout').value,
+            'room-type': document.getElementById('room-type').value,
+            comments: document.getElementById('comments').value
+        });
+
+        // Send the form data to your server-side application
+        fetch('/bookRoom', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData,
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text(); // or .json() if your server responds with JSON
+        })
+        .then(data => {
+            console.log('Success:', data);
+            window.location.href = '/user'; // Redirect to user's booking page upon successful booking
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle error here (e.g., display an error message)
+        });
+    });
+</script>
+
+
+</body>
+</html>

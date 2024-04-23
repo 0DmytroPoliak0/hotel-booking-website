@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluto Hotels Ltd - Reports</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-r from-gray-700 to-gray-900 text-white">
+
+<header class="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <img src="logo.png" alt="Logo" class="h-12">
+        <nav>
+            <ul class="flex items-center space-x-4">
+                <li><a href="#" class="hover:underline">About Us</a></li>
+                <li><a href="#" class="hover:underline">Contact Us</a></li>
+                <li><a href="Account.html" class="hover:underline">Account</a></li>
+                <li><a href="AdminPage.html" class="hover:underline">Admin</a></li>
+                <li><a href="Main.html" class="hover:underline">Main Page</a></li>
+            </ul>
+        </nav>
+        <div>
+            <button class="bg-blue-500 hover:bg-blue-700 transition duration-200 font-bold py-2 px-4 rounded">Sign Up</button>
+            <button class="ml-4 bg-blue-500 hover:bg-blue-700 transition duration-200 font-bold py-2 px-4 rounded">Log In</button>
+        </div>
+    </div>
+</header>
+
+
+<main class="container mx-auto mt-10 text-center">
+    <h1 class="text-4xl font-bold mb-10">Reports</h1>
+    <div class="tabs flex space-x-1 justify-center mb-8">
+        <!-- Buttons for switching reports -->
+        <button onclick="openReport(event, 'roomTaken')" class="tablink bg-blue-500 hover:bg-blue-600 transition duration-200 font-bold py-2 px-4 rounded shadow-lg">Room Taken</button>
+        <button onclick="openReport(event, 'hotelPopularity')" class="tablink bg-blue-500 hover:bg-blue-600 transition duration-200 font-bold py-2 px-4 rounded shadow-lg">Hotel Popularity</button>
+        <button onclick="openReport(event, 'topCustomers')" class="tablink bg-blue-500 hover:bg-blue-600 transition duration-200 font-bold py-2 px-4 rounded shadow-lg">Top Customers</button>
+    </div>
+
+
+    <div id="roomTaken" class="tabcontent hidden">
+        <h2 class="text-2xl font-semibold mb-4">Room Taken Report</h2>
+        <div class="report-content">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" class="bg-gray-800">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" class="bg-gray-800">
+            <button onclick="fetchRoomTakenReport()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Generate Report</button>
+            <button onclick="downloadRoomTakenReport()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">Download Report as TXT</button>
+        </div>
+        <div id="roomTakenData" class="mt-4"></div>
+    </div>
+
+    <div id="hotelPopularity" class="tabcontent hidden">
+        <h2 class="text-2xl font-semibold mb-4">Hotel Popularity Report</h2>
+        <div class="report-content">
+            <p class="text-gray-700">Hotels ranked by popularity:</p>
+            <div id="hotelPopularityData"></div>
+        </div>
+        <a href="http://localhost:8000/hotelPopularity" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Download Report as TXT</a>
+    </div>
+
+    <div id="topCustomers" class="tabcontent hidden">
+        <h2 class="text-2xl font-semibold mb-4">Top Customers Report</h2>
+        <div class="report-content">
+            <p class="text-gray-700">Top 3 customers:</p>
+            <div id="topCustomersData"></div>
+        </div>
+        <!-- Updated button for TXT download, replacing saveReport function with direct link -->
+        <a href="http://localhost:8000/topCustomers" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Download Report as TXT</a>
+    </div>
+
+
+
+</div>
+</main>
+
+<footer class="bg-gray-800 text-white text-center py-4 mt-8">
+    <p>Copyright &copy; 2022 Pluto Hotels Ltd</p>
+    <p>Some hotels require you to cancel more than 24 hours before check-in. Details on site.</p>
+    <p>© 2024 Pluto Hotels Ltd.com is an Expedia Group company. All rights reserved.</p>
+    <a href="mailto: contact@plutohotels.com" class="hover:text-blue-400 transition-colors duration-200">contact@plutohotels.com</a>
+</footer>
+
+
+<script>
+    // Existing functions: fetchTopCustomers, displayTopCustomers
+
+    function openReport(evt, reportName) {
+        let i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(reportName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+        // Fetch respective data when each tab is clicked
+        if (reportName === 'topCustomers') {
+            fetchTopCustomers();
+        } else if (reportName === 'hotelPopularity') {
+            fetchHotelPopularity(); // Ensure data is fetched when the hotel popularity tab is opened
+        }
+    }
+
+    function fetchHotelPopularity() {
+        fetch('http://localhost:8000/hotelPopularity')
+            .then(response => response.text())
+            .then(data => {
+                displayHotelPopularity(data);
+            })
+            .catch(error => {
+                console.error('Error fetching hotel popularity:', error);
+                document.getElementById('hotelPopularityData').innerText = 'Failed to load data. Please try again.';
+            });
+    }
+
+    function displayHotelPopularity(data) {
+        const hotelPopularityDiv = document.getElementById('hotelPopularityData');
+        hotelPopularityDiv.innerHTML = '';
+        const hotels = data.split('\n');
+        hotels.forEach(hotel => {
+            if (hotel.trim() === "") return; // Skip empty lines
+            const parts = hotel.split(', ');
+            if(parts.length < 3) return; // Ensure there are enough parts to avoid errors
+            const hotelID = parts[0].split(": ")[1];
+            const name = parts[1].split(": ")[1];
+            const bookingCount = parts[2].split(": ")[1];
+            const hotelDiv = document.createElement('div');
+            hotelDiv.innerHTML = `<div class="hotel-info">
+                                    <p><strong>Hotel ID:</strong> ${hotelID}</p>
+                                    <p><strong>Name:</strong> ${name}</p>
+                                    <p><strong>Booking Count:</strong> ${bookingCount}</p>
+                                  </div>`;
+            hotelPopularityDiv.appendChild(hotelDiv);
+        });
+    }
+
+
+    function fetchTopCustomers() {
+        fetch('http://localhost:8000/topCustomers')
+            .then(response => response.text())
+            .then(data => {
+                displayTopCustomers(data);
+            })
+            .catch(error => {
+                console.error('Error fetching top customers:', error);
+                document.getElementById('topCustomersData').innerText = 'Failed to load data. Please try again.';
+            });
+    }
+
+    function displayTopCustomers(data) {
+        const topCustomersDiv = document.getElementById('topCustomersData');
+        topCustomersDiv.innerHTML = '';
+        const customers = data.split('\n');
+        customers.forEach(customer => {
+            if (customer.trim() === "") return; // Skip empty lines
+            // Continue processing non-empty lines
+            const [userID, name, email, bookingCount] = customer.split(',');
+            const customerDiv = document.createElement('div');
+            customerDiv.innerHTML = `<div class="customer-info">
+                                        <p><strong>User ID:</strong> ${userID}</p>
+                                        <p><strong>Name:</strong> ${name}</p>
+                                        <p><strong>Email:</strong> ${email}</p>
+                                        <p><strong>Bookings:</strong> ${bookingCount}</p>
+                                      </div>`;
+            topCustomersDiv.appendChild(customerDiv);
+        });
+    }
+
+    function fetchRoomTakenReport() {
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        if (!startDate || !endDate) {
+            alert('Please select both start and end dates.');
+            return;
+        }
+        fetch(`http://localhost:8000/roomTaken?startDate=${startDate}&endDate=${endDate}`)
+            .then(response => response.text())
+            .then(data => {
+                const roomTakenDiv = document.getElementById('roomTakenData');
+                roomTakenDiv.innerText = data; // Assuming the server sends data in plain text format
+            })
+            .catch(error => {
+                console.error('Error fetching room taken report:', error);
+                document.getElementById('roomTakenData').innerText = 'Failed to load data. Please try again.';
+            });
+    }
+
+    function downloadRoomTakenReport() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    if (!startDate || !endDate) {
+        alert('Please select both start and end dates.');
+        return;
+    }
+    fetch(`http://localhost:8000/roomTaken?startDate=${startDate}&endDate=${endDate}`)
+        .then(response => response.text())
+        .then(data => {
+            // Create a blob from the data
+            const blob = new Blob([data], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            // Create a new anchor element for download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'room-taken-report.txt';
+            document.body.appendChild(a); // Append the anchor to the body
+            a.click(); // Programmatically click the anchor to trigger the download
+            document.body.removeChild(a); // Clean up
+            window.URL.revokeObjectURL(url); // Free up memory
+        })
+        .catch(error => {
+            console.error('Error downloading room taken report:', error);
+            alert('Failed to download data. Please try again.');
+        });
+}
+
+
+</script>
+</body>
+</html>
