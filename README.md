@@ -2,7 +2,7 @@
 
 # Hotel Booking Website
 
-A comprehensive hotel booking website built using HTML, CSS, and JavaScript. This project is designed to provide a seamless booking experience for users, including features such as user registration, booking management, and contact forms.
+A comprehensive hotel booking website built using HTML, CSS, Java and JavaScript. This project is designed to provide a seamless booking experience for users, including features such as user registration, booking management, and contact forms.
 
 ## Features
 - **User Registration and Login:** Secure user authentication and account management.
